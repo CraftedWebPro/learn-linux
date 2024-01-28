@@ -1,4 +1,4 @@
-Learn-Linux
+#Learn-Linux
 
 Description
 Learn-Linux is a React Native app that provides a playful glimpse into the Linux world, offering a curated selection of guides and resources tailored for beginners. This app serves as a starting point for those new to Linux, providing accessible explanations and hands-on activities to foster curiosity and exploration.
