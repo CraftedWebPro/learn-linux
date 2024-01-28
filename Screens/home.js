@@ -55,22 +55,22 @@ const Home = ({ navigation }) => {
 
       <View style={styles.buttonContainer}>
         <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Beginner')}>
+          <TouchableOpacity style={[styles.button, { flex: 1 }]} onPress={() => handleButtonPress('Beginner')}>
             <Text style={styles.buttonText}>Beginner</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Intermediate')}>
-            <Text style={styles.buttonText}>Intermediate</Text>
+          <TouchableOpacity style={[styles.button, { flex: 1 }]} onPress={() => handleButtonPress('Intermediate')}>
+            <Text style={styles.buttonText}>Inter</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Advanced')}>
+          <TouchableOpacity style={[styles.button, { flex: 1 }]} onPress={() => handleButtonPress('Advanced')}>
             <Text style={styles.buttonText}>Advanced</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.exploreButton} onPress={() => handleButtonPress('Explore')}>
-            <Text style={styles.exploreButtonText}>Explore More</Text>
+          <TouchableOpacity style={[styles.exploreButton, { flex: 1 }]} onPress={() => handleButtonPress('Explore')}>
+            <Text style={styles.exploreButtonText}>Explore</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -142,35 +142,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    flex: 1,
-    backgroundColor: '#2ecc71', // Green
-    paddingVertical: 15,
-    paddingHorizontal: 20, // Adjust padding
-    borderRadius: 10,
-    marginHorizontal: 10, // Adjust margin
-    marginBottom: 10,
+    backgroundColor: '#2980b9', // Blue color reflecting Linux branding
+    paddingVertical: 20, // Increase padding for prominence
+    paddingHorizontal: 30, // Increase horizontal padding for better spacing
+    borderRadius: 15, // Rounded corners for a modern look
+    marginHorizontal: 10, // Adjust margin for spacing between buttons
+    marginBottom: 20, // Increase margin bottom for spacing between rows
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 16, // Adjust the font size as needed
     textAlign: 'center',
-    lineHeight: 20,
   },
   exploreButton: {
-    backgroundColor: '#e74c3c', // Red
-    paddingVertical: 15,
+    backgroundColor: '#e67e22', // Orange color for Explore More button
+    paddingVertical: 20,
     paddingHorizontal: 30,
-    borderRadius: 10,
-    marginHorizontal: 5,
-    marginBottom: 10,
+    borderRadius: 15,
+    marginHorizontal: 10,
+    marginBottom: 20,
   },
   exploreButtonText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
     textAlign: 'center',
-    lineHeight: 20,
   },
   darkModeContainer: {
     flexDirection: 'row',
