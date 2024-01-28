@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Linking } from 'react-native';
+import { View, Text, StyleSheet, Linking, ScrollView } from 'react-native';
 import { useTheme } from './ThemeContext';
 
 const Credit = () => {
@@ -21,7 +21,7 @@ const Credit = () => {
   };
 
   return (
-    <View style={[styles.container, isDarkMode && styles.darkContainer]}>
+    <ScrollView contentContainerStyle={[styles.container, isDarkMode && styles.darkContainer]}>
       <Text style={[styles.heading, isDarkMode && styles.darkText]}>Developer Information</Text>
 
       <View style={styles.infoContainer}>
@@ -62,13 +62,12 @@ const Credit = () => {
       <Text style={[styles.disclaimer, isDarkMode && styles.darkText]}>
         {typedText}
       </Text>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
     backgroundColor: '#f0f5f9', // Light blue background
     borderRadius: 10,

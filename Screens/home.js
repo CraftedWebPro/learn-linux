@@ -5,22 +5,34 @@ import { useTheme } from './ThemeContext';
 const Home = ({ navigation }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   const [typedDisclaimer, setTypedDisclaimer] = useState('');
+  const [typedHeading, setTypedHeading] = useState('');
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   useEffect(() => {
     const disclaimerText = "This app provides a playful glimpse into the Linux world and is not a comprehensive guide. For more Linux content, check out our tutorials or join the discussion at Linux.org.";
+    const headingText = "Welcome to Learn Linux!";
+
     let index = 0;
 
     const typingInterval = setInterval(() => {
-      setTypedDisclaimer(disclaimerText.substring(0, index));
+      if (!showDisclaimer) {
+        setTypedHeading(headingText.substring(0, index) + "_");
+      } else {
+        setTypedDisclaimer(disclaimerText.substring(0, index));
+      }
       index++;
 
+      if (!showDisclaimer && index > headingText.length) {
+        clearInterval(typingInterval);
+        setTimeout(() => setShowDisclaimer(true), 2000); // Display disclaimer after 2 seconds
+      }
       if (index > disclaimerText.length) {
         clearInterval(typingInterval);
       }
-    }, 50);
+    }, 100);
 
     return () => clearInterval(typingInterval);
-  }, []);
+  }, [showDisclaimer]);
 
   const handleButtonPress = (level) => {
     if (level === 'Explore') {
@@ -34,8 +46,12 @@ const Home = ({ navigation }) => {
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
       <Image source={require('../assets/penguin.png')} style={styles.image} />
 
-      <Text style={[styles.welcomeText, isDarkMode && styles.darkText]}>Welcome to Learn Linux!</Text>
-      <Text style={[styles.funnyText, isDarkMode && styles.darkText]}>Because penguins need love too!</Text>
+      <Text style={[styles.welcomeText, isDarkMode && styles.darkText]}>
+        {typedHeading}
+      </Text>
+      <Text style={[styles.funnyText, isDarkMode && styles.darkText]}>
+        Because penguins need love too!
+      </Text>
 
       <View style={styles.buttonContainer}>
         <View style={styles.row}>
@@ -66,22 +82,24 @@ const Home = ({ navigation }) => {
         <Switch value={isDarkMode} onValueChange={toggleDarkMode} />
       </View>
 
-      <View style={styles.disclaimerContainer}>
-        <Text style={[styles.disclaimerText, isDarkMode && styles.darkText]}>
-          Disclaimer:
-        </Text>
-        <View style={styles.disclaimerContent}>
-          <Text style={styles.disclaimerText}>
-            {typedDisclaimer}
+      {showDisclaimer && (
+        <View style={styles.disclaimerContainer}>
+          <Text style={[styles.disclaimerText, isDarkMode && styles.darkText]}>
+            Disclaimer:
           </Text>
-          <Text style={[styles.link, styles.disclaimerText]} onPress={() => Linking.openURL('https://www.linux.org/forums/linux-beginner-tutorials.123/')}>
-            Linux.org
-          </Text>
-          <Text style={styles.disclaimerText}>
-            .
-          </Text>
+          <View style={styles.disclaimerContent}>
+            <Text style={styles.disclaimerText}>
+              {typedDisclaimer}
+            </Text>
+            <Text style={[styles.link, styles.disclaimerText]} onPress={() => Linking.openURL('https://www.linux.org/forums/linux-beginner-tutorials.123/')}>
+              Linux.org
+            </Text>
+            <Text style={styles.disclaimerText}>
+              .
+            </Text>
+          </View>
         </View>
-      </View>
+      )}
     </View>
   );
 };
@@ -127,9 +145,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2ecc71', // Green
     paddingVertical: 15,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20, // Adjust padding
     borderRadius: 10,
-    marginHorizontal: 5,
+    marginHorizontal: 10, // Adjust margin
     marginBottom: 10,
   },
   buttonText: {
